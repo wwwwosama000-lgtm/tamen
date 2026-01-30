@@ -15,6 +15,10 @@ class HomePage extends StatelessWidget {
         title: Text('app_title'.tr),
         actions: [
           IconButton(
+            icon: Icon(Icons.favorite),
+            onPressed: () => Get.toNamed('/favorites'),
+          ),
+          IconButton(
             icon: Icon(Icons.settings),
             onPressed: () => Get.toNamed('/settings'),
           ),
@@ -57,19 +61,32 @@ class HomePage extends StatelessWidget {
                               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppTheme.secondaryColor),
                             ),
                           ),
-                          if (recipeController.canEdit(recipe))
-                            Row(
-                              children: [
-                                IconButton(
-                                  icon: Icon(Icons.edit_outlined, color: Colors.blue),
-                                  onPressed: () => Get.toNamed('/add-edit-recipe', arguments: recipe),
+                          Row(
+                            children: [
+                              Obx(() => IconButton(
+                                icon: Icon(
+                                  recipeController.isFavorite(recipe.id!) 
+                                    ? Icons.favorite 
+                                    : Icons.favorite_border,
+                                  color: Colors.red,
                                 ),
-                                IconButton(
-                                  icon: Icon(Icons.delete_outline, color: Colors.red),
-                                  onPressed: () => _showDeleteDialog(context, recipe.id!),
+                                onPressed: () => recipeController.toggleFavorite(recipe),
+                              )),
+                              if (recipeController.canEdit(recipe))
+                                Row(
+                                  children: [
+                                    IconButton(
+                                      icon: Icon(Icons.edit_outlined, color: Colors.blue),
+                                      onPressed: () => Get.toNamed('/add-edit-recipe', arguments: recipe),
+                                    ),
+                                    IconButton(
+                                      icon: Icon(Icons.delete_outline, color: Colors.red),
+                                      onPressed: () => _showDeleteDialog(context, recipe.id!),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
+                            ],
+                          ),
                         ],
                       ),
                       SizedBox(height: 8),

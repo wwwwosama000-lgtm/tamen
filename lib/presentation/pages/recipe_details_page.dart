@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../data/models/recipe_model.dart';
 import '../../core/theme/app_theme.dart';
+import '../controllers/recipe_controller.dart';
 
 class RecipeDetailsPage extends StatelessWidget {
+  final RecipeController recipeController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     final RecipeModel recipe = Get.arguments;
@@ -13,6 +16,17 @@ class RecipeDetailsPage extends StatelessWidget {
           SliverAppBar(
             expandedHeight: 200,
             pinned: true,
+            actions: [
+              Obx(() => IconButton(
+                icon: Icon(
+                  recipeController.isFavorite(recipe.id!) 
+                    ? Icons.favorite 
+                    : Icons.favorite_border,
+                  color: Colors.white,
+                ),
+                onPressed: () => recipeController.toggleFavorite(recipe),
+              )),
+            ],
             flexibleSpace: FlexibleSpaceBar(
               title: Text(recipe.title),
               background: Container(

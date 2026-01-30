@@ -35,7 +35,11 @@ class LocalizationService extends Translations {
       'no_recipes': 'No recipes found',
       'unauthorized': 'Unauthorized access',
       'success': 'Success',
-      'error': 'Error'
+      'error': 'Error',
+      'favorites': 'Favorites',
+      'no_favorites': 'No favorites yet',
+      'added_to_favorites': 'Added to favorites',
+      'removed_from_favorites': 'Removed from favorites'
     },
     'ar_SA': {
       'app_title': 'تطبيق الوصفات',
@@ -62,7 +66,11 @@ class LocalizationService extends Translations {
       'no_recipes': 'لا توجد وصفات',
       'unauthorized': 'وصول غير مصرح به',
       'success': 'تم بنجاح',
-      'error': 'خطأ'
+      'error': 'خطأ',
+      'favorites': 'المفضلة',
+      'no_favorites': 'لا توجد مفضلات بعد',
+      'added_to_favorites': 'تمت الإضافة للمفضلة',
+      'removed_from_favorites': 'تم الحذف من المفضلة'
     }
   };
 

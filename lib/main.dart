@@ -10,6 +10,7 @@ import 'presentation/pages/home_page.dart';
 import 'presentation/pages/recipe_details_page.dart';
 import 'presentation/pages/add_edit_recipe_page.dart';
 import 'presentation/pages/settings_page.dart';
+import 'presentation/pages/favorites_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/recipe-details', page: () => RecipeDetailsPage()),
         GetPage(name: '/add-edit-recipe', page: () => AddEditRecipePage()),
         GetPage(name: '/settings', page: () => SettingsPage()),
+        GetPage(name: '/favorites', page: () => FavoritesPage()),
       ],
     );
   }

@@ -25,7 +25,7 @@ class _RegisterPageState extends State<RegisterPage> {
             TextField(controller: passController, decoration: InputDecoration(labelText: 'password'.tr), obscureText: true),
             DropdownButton<String>(
               value: selectedRole,
-              items: ['Admin', 'Chef', 'Viewer'].map((String role) {
+              items: [ 'Chef', 'Viewer'].map((String role) {
                 return DropdownMenuItem(value: role, child: Text(role.tr));
               }).toList(),
               onChanged: (value) => setState(() => selectedRole = value!),

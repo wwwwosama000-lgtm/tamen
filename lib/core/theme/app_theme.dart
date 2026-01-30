@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  static const primaryColor = Color(0xFFE67E22); // Orange Carrot
-  static const secondaryColor = Color(0xFF2C3E50); // Midnight Blue
+  static const primaryColor = Color(0xFFE67E22);
+  static const secondaryColor = Color(0xFF2C3E50);
   static const backgroundColor = Color(0xFFF8F9F9);
   static const cardColor = Colors.white;
 
