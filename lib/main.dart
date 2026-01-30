@@ -1,55 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tamen/app/routes/app_pages.dart'; // تأكد من استيراد هذا الملف
-import 'package:tamen/app/utils/localization/app_translations.dart'; // وهذا أيضاً
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'core/localization/localization_service.dart';
+import 'core/theme/app_theme.dart';
+import 'presentation/controllers/auth_controller.dart';
+import 'presentation/pages/login_page.dart';
+import 'presentation/pages/register_page.dart';
+import 'presentation/pages/home_page.dart';
+import 'presentation/pages/recipe_details_page.dart';
+import 'presentation/pages/add_edit_recipe_page.dart';
+import 'presentation/pages/settings_page.dart';
 
-// لا تنسَ تغيير 'your_project_name' إلى اسم مشروعك الفعلي
-
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Get.put(AuthController());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      title: 'Recipe App',
       debugShowCheckedModeBanner: false,
-      title: 'Yemeni Social Security',
-
-      // 1. تم تصحيح الثيم هنا
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: Colors.grey[100],
-        appBarTheme: AppBarTheme(
-          backgroundColor: Colors.blue[800],
-          elevation: 0,
-          titleTextStyle: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
-          iconTheme: IconThemeData(color: Colors.white), // لتلوين أيقونة القائمة في AppBar
-        ),
-        bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          backgroundColor: Colors.white,
-          selectedItemColor: Colors.blue[800],
-          unselectedItemColor: Colors.grey[600],
-          elevation: 5,
-        ),
-        // تم تصحيح CardTheme إلى CardThemeData
-        cardTheme: CardThemeData(
-          elevation: 2,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        ),
-      ),
-
-      // إعدادات الترجمة
-      translations: AppTranslations(),
-      locale: Locale('ar', 'SA'), // اللغة الافتراضية هي العربية
-      fallbackLocale: Locale('en', 'US'),
-
-      // 2. تم تصحيح طريقة تحديد المسارات هنا
-      // استخدام الطريقة الموصى بها من GetX لتجنب الأخطاء
-      initialRoute: AppPages.INITIAL,
-      getPages: AppPages.routes,
+      theme: AppTheme.lightTheme,
+      translations: LocalizationService(),
+      locale: LocalizationService.locale,
+      fallbackLocale: LocalizationService.fallbackLocale,
+      supportedLocales: LocalizationService.locales,
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      initialRoute: '/login',
+      getPages: [
+        GetPage(name: '/login', page: () => LoginPage()),
+        GetPage(name: '/register', page: () => RegisterPage()),
+        GetPage(name: '/home', page: () => HomePage()),
+        GetPage(name: '/recipe-details', page: () => RecipeDetailsPage()),
+        GetPage(name: '/add-edit-recipe', page: () => AddEditRecipePage()),
+        GetPage(name: '/settings', page: () => SettingsPage()),
+      ],
     );
   }
 }
